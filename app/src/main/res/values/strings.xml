@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">librereader</string>
+    <string name="app_name">LibreReader</string>
     <string name="bottom_bar_home">Home</string>
     <string name="bottom_bar_books">Books</string>
     <string name="bottom_bar_settings">Settings</string>
     <string name="settings_about_title">About LibreReader</string>
     <string name="settings_github_title">GitHub repository</string>
+    <string name="settings_icons8_title">Icons by Icons8</string>
+    <string name="books_none">No books found.</string>
+    <string name="navigation_back">Back</string>
 </resources>

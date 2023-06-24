@@ -37,17 +37,21 @@ import cloud.ironveil.librereader.ui.components.layout.settings.SettingsAbout
 import cloud.ironveil.librereader.ui.theme.LibrereaderTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
+// Main activity
+
 class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Fulscreen
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
 
             LibrereaderTheme {
-                // A surface container using the 'background' color from the theme
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -55,19 +59,21 @@ class MainActivity : ComponentActivity() {
 
                     val systemUiController = rememberSystemUiController()
 
+                    // Transparent system bars
                     SideEffect {
                         systemUiController.setSystemBarsColor(color = Color.Transparent)
                     }
 
                     val navController = rememberNavController()
-
                     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
+                    // Navigation
                     NavHost(navController = navController, startDestination = "home") {
                         composable("home") { HomePage(navController, scrollBehavior) }
-                        composable("books") { BookPage(scrollBehavior) }
+                        composable("books") { BookPage(navController, scrollBehavior) }
                         composable("settings") { SettingsPage(navController, scrollBehavior) }
 
+                        // Settings links
                         composable("settings_about") { SettingsAbout(navController, scrollBehavior) }
                     }
                 }

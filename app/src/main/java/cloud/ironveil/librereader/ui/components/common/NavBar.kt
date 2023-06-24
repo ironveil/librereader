@@ -14,21 +14,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import cloud.ironveil.librereader.R
 
+// Main bottom navigation bar
+
 @Composable
 fun NavBar(
     navController: NavController,
+    screen: String
 ) {
 
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val screen = navBackStackEntry?.destination?.route
-
+    // MD3 Navbar
     NavigationBar() {
+
+        // Home button
         NavigationBarItem(
             icon = {
                 Icon(
@@ -37,13 +39,16 @@ fun NavBar(
                     } else {
                         Icons.Outlined.Home
                     },
-                    contentDescription = stringResource(R.string.bottom_bar_books)
+                    contentDescription = stringResource(R.string.bottom_bar_home)
                 )
             },
+
             label = {
                 Text(text = stringResource(R.string.bottom_bar_home))
             },
+
             selected = screen == "home",
+
             onClick = { navController.navigate("home") {
                 popUpTo(navController.graph.findStartDestination().id) {
                     saveState = true
@@ -54,6 +59,7 @@ fun NavBar(
             } }
         )
 
+        // Books button
         NavigationBarItem(
             icon = {
                 Icon(
@@ -65,10 +71,13 @@ fun NavBar(
                     contentDescription = stringResource(R.string.bottom_bar_books)
                 )
             },
+
             label = {
                 Text(text = stringResource(R.string.bottom_bar_books))
             },
+
             selected = screen == "books",
+
             onClick = { navController.navigate("books") {
                 popUpTo(navController.graph.findStartDestination().id) {
                     saveState = true
@@ -79,6 +88,7 @@ fun NavBar(
             } }
         )
 
+        // Settings button
         NavigationBarItem(
             icon = {
                 Icon(
@@ -90,10 +100,13 @@ fun NavBar(
                     contentDescription = stringResource(R.string.bottom_bar_settings)
                 )
             },
+
             label = {
                 Text(text = stringResource(R.string.bottom_bar_settings))
             },
+
             selected = screen == "settings",
+
             onClick = { navController.navigate("settings") {
                 popUpTo(navController.graph.findStartDestination().id) {
                     saveState = true

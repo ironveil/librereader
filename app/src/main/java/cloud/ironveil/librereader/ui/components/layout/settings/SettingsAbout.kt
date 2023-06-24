@@ -27,6 +27,8 @@ import androidx.navigation.NavController
 import cloud.ironveil.librereader.R
 import com.alorma.compose.settings.ui.SettingsMenuLink
 
+// "About" page in settings
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsAbout(
@@ -38,7 +40,9 @@ fun SettingsAbout(
 
         topBar = {
             MediumTopAppBar(
-                title = { Text(text = "About" )},
+                title = {
+                    Text(text = stringResource(R.string.settings_about_title) )
+                },
 
                 navigationIcon = {
                     IconButton(onClick = {
@@ -46,11 +50,12 @@ fun SettingsAbout(
                     }) {
                         Icon(
                             Icons.Filled.ArrowBack,
-                            contentDescription = null
+                            contentDescription = stringResource(R.string.navigation_back)
                         )
                     }
                 },
 
+                // Expand upon scroll
                 scrollBehavior = scrollBehaviour
             )
         }
@@ -68,25 +73,38 @@ fun SettingsAbout(
                 verticalArrangement = Arrangement.spacedBy(0.dp)
             ) {
 
+                // Allow external links
                 val uriHandler = LocalUriHandler.current
-                
+
+                // GitHub repo link
                 SettingsMenuLink(
                     icon = {
-                           Icon(painterResource(R.drawable.github_icon), contentDescription = "GitHub")
+                           Icon(
+                               painterResource(R.drawable.github_icon),
+                               contentDescription = stringResource(R.string.settings_github_title)
+                           )
                     },
+
                     title = {
                         Text(stringResource(R.string.settings_github_title)) 
                    },
+
                     onClick = { uriHandler.openUri("https://github.com/ironveil/librereader")}
                 )
 
+                // Icons8 link
                 SettingsMenuLink (
                     icon = {
-                        Icon(Icons.Filled.Photo, contentDescription = "Icons8")
+                        Icon(
+                            Icons.Filled.Photo,
+                            contentDescription = stringResource(R.string.settings_icons8_title)
+                        )
                     },
+
                     title = {
-                        Text("Icons by Icons8")
+                        Text(stringResource(R.string.settings_icons8_title))
                     },
+
                     onClick = { uriHandler.openUri("https://icons8.com") }
                 )
             }
